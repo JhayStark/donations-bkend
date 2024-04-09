@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dbConnect = require('./config/dbConnect');
+const credentials = require('./config/credentials');
 const { corsOptions } = require('./config/corsOptions');
 const donationsRouter = require('./donations/routes/donations');
 
@@ -12,6 +13,8 @@ const app = express();
 dotenv.config();
 app.use(helmet());
 app.use(morgan('dev'));
+app.use(credentials);
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
