@@ -1,4 +1,4 @@
-const allowedOrigins = [];
+const allowedOrigins = ['*'];
 
 if (process.env.NODE_ENV === 'production') {
   allowedOrigins.push(process.env.WEB_URL);
