@@ -3,7 +3,10 @@ const allowedOrigins = [];
 if (process.env.NODE_ENV === 'production') {
   allowedOrigins.push(process.env.WEB_URL);
 } else {
-  allowedOrigins.push('http://localhost:3000');
+  allowedOrigins.push(
+    'http://localhost:3000',
+    'https://donations-nine.vercel.app'
+  );
 }
 
 const corsOptions = {
