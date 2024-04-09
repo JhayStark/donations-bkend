@@ -10,7 +10,7 @@ function formatCurrencyToGHS(amount) {
   const parts = formattedAmount.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  return `GHS ${parts.join('.')}`;
+  return `GHS${parts.join('.')}`;
 }
 
 module.exports = { formatCurrencyToGHS };
