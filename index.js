@@ -12,7 +12,6 @@ const app = express();
 dotenv.config();
 app.use(helmet());
 app.use(morgan('dev'));
-app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
