@@ -5,7 +5,6 @@ const credentials = require('./config/credentials');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const dbConnect = require('./config/dbConnect');
-const credentials = require('./config/credentials');
 const { corsOptions } = require('./config/corsOptions');
 const donationsRouter = require('./donations/routes/donations');
 
