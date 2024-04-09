@@ -1,12 +1,13 @@
 const Donation = require('../models/donation');
 const { sendSMS } = require('../../utils/sms');
+const { formatCurrencyToGHS } = require('../../utils/helpers');
 
 const addDonation = async (req, res) => {
   try {
     const newDonation = await Donation.create(req.body);
-    const message = `Thank you, ${newDonation.name}, for your donation of GHS ${
-      newDonation.amount
-    } to ${
+    const message = `Thank you, ${
+      newDonation.name
+    }, for your donation of ${formatCurrencyToGHS(newDonation.amount)} to ${
       newDonation.recipientType.includes('Individual')
         ? newDonation.recipientName
         : `the ${newDonation.recipientType}`
