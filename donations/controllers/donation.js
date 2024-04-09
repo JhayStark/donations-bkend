@@ -65,7 +65,8 @@ const donationStats = async (req, res) => {
         },
       },
     ]);
-    res.status(200).json(stats);
+    const statsObj = stats[0] || { total: 0, count: 0 };
+    res.status(200).json(statsObj);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
