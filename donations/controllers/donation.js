@@ -72,4 +72,35 @@ const donationStats = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-module.exports = { addDonation, getDonations, donationStats };
+
+const bulkSms = async (req, res) => {
+  try {
+    const { message } = req.body;
+
+    if (message.includes('$name$')) {
+      Donation.find({})
+        .select('name contact')
+        .then(donor => {
+          donor.forEach(donor => {
+            const messageBody = message.replace('$name$', donor.name);
+            // console.log(messageBody, 'message body');
+            sendSMS(donor.contact, messageBody);
+          });
+        })
+        .catch(err => console.log(err));
+    } else {
+      Donation.find({})
+        .select('contact -_id')
+        .then(donor => {
+          const numbers = donor.map(donor => donor.contact);
+          sendSMS(numbers, message);
+        })
+        .catch(err => err);
+    }
+    res.status(200).json('Messages sent');
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+module.exports = { addDonation, getDonations, donationStats, bulkSms };
