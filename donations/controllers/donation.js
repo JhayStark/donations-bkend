@@ -82,7 +82,7 @@ const bulkSms = async (req, res) => {
         .select('name contact')
         .then(donor => {
           donor.forEach(donor => {
-            const messageBody = message.replace('$name$', donor.name);
+            const messageBody = message.replaceAll('$name$', donor.name);
             // console.log(messageBody, 'message body');
             sendSMS(donor.contact, messageBody);
           });
