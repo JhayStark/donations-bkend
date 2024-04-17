@@ -24,6 +24,7 @@ const addDonation = async (req, res) => {
 
 const getDonations = async (req, res) => {
   const search = req.query.search || '';
+  const searchField = req.query.searchField || 'name';
   const pageSize = parseInt(req.query.pageSize) || 10;
   const page = parseInt(req.query.page) || 1;
   const skip = (page - 1) * pageSize;
@@ -33,7 +34,7 @@ const getDonations = async (req, res) => {
     const aggregationPipeline = [
       {
         $match: {
-          name: { $regex: search, $options: 'i' },
+          [searchField]: { $regex: search, $options: 'i' },
           deleted: false,
         },
       },
