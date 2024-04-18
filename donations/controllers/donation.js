@@ -112,9 +112,12 @@ const editDonations = async (req, res) => {
 
 const donationStats = async (req, res) => {
   try {
+    const search = req.query.search || '';
+    const searchField = req.query.searchField || 'name';
     const stats = await Donation.aggregate([
       {
         $match: {
+          [searchField]: { $regex: search, $options: 'i' },
           deleted: false,
         },
       },
